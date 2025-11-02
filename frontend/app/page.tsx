@@ -5,6 +5,7 @@ import { Search, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EventCard } from "@/components/event-card";
+import { Navigation } from "@/components/navigation";
 
 interface Event {
   title: string;
@@ -57,19 +58,19 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Peatix Event Search
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Discover amazing events on Peatix
-          </p>
-        </div>
-      </header>
+      {/* Navigation */}
+      <Navigation />
 
       <main className="container mx-auto px-4 py-12">
+        {/* Page Title */}
+        <div className="max-w-2xl mx-auto mb-8 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            イベント検索
+          </h1>
+          <p className="text-gray-600">
+            Peatixで開催される素敵なイベントを見つけましょう
+          </p>
+        </div>
         {/* Search Section */}
         <div className="max-w-2xl mx-auto mb-12">
           <form onSubmit={handleSearch} className="flex gap-2">
