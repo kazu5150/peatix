@@ -1,6 +1,6 @@
-# Peatix イベント検索ツール
+# Peatix イベント検索アプリケーション
 
-Peatixのイベントをキーワードで検索するPythonスクリプトです。
+Peatixのイベントをキーワードで検索できるフルスタックWebアプリケーションです。
 
 ## 機能
 
@@ -10,45 +10,93 @@ Peatixのイベントをキーワードで検索するPythonスクリプトで�
   - 開催日時
   - 開催場所（オンライン/会場）
   - イベントURL
+- モダンでレスポンシブなUI（Next.js + Shadcn/ui）
+
+## プロジェクト構造
+
+```
+peatix/
+├── backend/          # Python (FastAPI) バックエンド
+│   ├── api.py        # FastAPI アプリケーション
+│   ├── peatix_search.py  # Peatixスクレイピング
+│   └── requirements.txt  # Python依存関係
+└── frontend/         # Next.js フロントエンド
+    ├── app/          # Next.js App Router
+    ├── components/   # Reactコンポーネント
+    └── package.json  # Node.js依存関係
+```
 
 ## セットアップ
 
-### 1. 仮想環境の作成
+### バックエンド（Python + FastAPI）
 
 ```bash
+cd backend
+
+# 仮想環境の作成
 uv venv
-```
 
-### 2. 必要なパッケージのインストール
-
-```bash
+# 依存関係のインストール
 uv pip install -r requirements.txt
-```
 
-### 3. Playwrightブラウザのインストール
-
-```bash
+# Playwrightブラウザのインストール
 source .venv/bin/activate && playwright install chromium
 ```
 
-## 使い方
-
-### 基本的な使い方
+### フロントエンド（Next.js）
 
 ```bash
-# 仮想環境を有効化
-source .venv/bin/activate
+cd frontend
 
-# スクリプトを実行
+# 依存関係のインストール
+npm install
+```
+
+## 実行方法
+
+アプリケーションを実行するには、バックエンドとフロントエンドの両方を起動する必要があります。
+
+### 1. バックエンドAPIを起動
+
+```bash
+cd backend
+source .venv/bin/activate
+python api.py
+```
+
+APIは `http://localhost:8000` で起動します。
+
+- API ドキュメント: http://localhost:8000/docs
+- 検索エンドポイント: http://localhost:8000/api/search?keyword=AI
+
+### 2. フロントエンドを起動（別のターミナルで）
+
+```bash
+cd frontend
+npm run dev
+```
+
+フロントエンドは `http://localhost:3000` で起動します。
+
+### 3. ブラウザでアクセス
+
+http://localhost:3000 を開いて、イベントを検索できます。
+
+## 開発
+
+### バックエンドのみを使用
+
+CLI版のスクリプトを直接実行することもできます:
+
+```bash
+cd backend
+source .venv/bin/activate
 python peatix_search.py "キーワード"
 ```
 
 ### 使用例
 
 ```bash
-# 仮想環境を有効化
-source .venv/bin/activate
-
 # AIに関するイベントを検索
 python peatix_search.py "AI"
 
@@ -59,21 +107,20 @@ python peatix_search.py "音楽"
 python peatix_search.py "プログラミング"
 ```
 
-## 出力例
+## 技術スタック
 
-```
-🔍 'AI' で検索中...
+### バックエンド
+- **Python 3.13+**
+- **FastAPI**: 高速なWeb APIフレームワーク
+- **Playwright**: ブラウザ自動化
+- **Uvicorn**: ASGIサーバー
 
-✅ 10件のイベントが見つかりました:
-
-================================================================================
-
-【1】【山﨑拓巳と学ぶ！】まだ言葉になってない"わたし"、ChatGPTと一緒に見つけてみよう！
-📅 日時: 水曜日 22:00 (70 日間)
-📍 場所: オンライン
-🔗 URL: https://peatix.com/event/4576917
---------------------------------------------------------------------------------
-```
+### フロントエンド
+- **Next.js 15**: Reactフレームワーク
+- **TypeScript**: 型安全性
+- **Tailwind CSS**: ユーティリティファーストCSS
+- **Shadcn/ui**: モダンなUIコンポーネント
+- **Lucide React**: アイコンライブラリ
 
 ## 注意事項
 
@@ -85,6 +132,7 @@ python peatix_search.py "プログラミング"
 ## 動作環境
 
 - Python 3.8以上
+- Node.js 18以上
 - macOS / Linux / Windows
 
 ## ライセンス

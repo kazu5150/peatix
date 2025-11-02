@@ -13,6 +13,16 @@ build/
 venv/
 ENV/
 
+# Node.js / Frontend
+node_modules/
+.next/
+out/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
 # IDE
 .vscode/
 .idea/
@@ -24,6 +34,13 @@ debug_*.py
 *.png
 *.jpg
 *.jpeg
+peatix_page.png
+
+# Environment variables
+.env
+.env.local
+.env.production
 
 # OS
 .DS_Store
+*.iml
