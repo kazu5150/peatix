@@ -42,6 +42,10 @@ peatix_page.png
 .env.local
 .env.production
 
+# Database
+*.db
+peatix_ai.db
+
 # OS
 .DS_Store
 *.iml

@@ -30,13 +30,26 @@ peatix/
 **Tech Stack**:
 - FastAPI for REST API
 - Playwright for browser automation
+- SQLAlchemy for ORM and database management
+- SQLite for development database
+- OpenAI API for AI recommendations (planned)
 - Uvicorn as ASGI server
 
 **Key Files**:
-- `api.py`: FastAPI application with `/api/search` endpoint
+- `api.py`: FastAPI application with REST endpoints
   - CORS configured for `http://localhost:3000`
-  - Pydantic models: `EventResponse`, `SearchResponse`
+  - Database initialization on startup
+  - Topic Management CRUD endpoints
+  - Event search endpoint
   - Error handling with HTTPException
+- `database.py`: SQLAlchemy models and database setup
+  - Models: `Topic`, `Recommendation`, `Notification`
+  - Relationships with cascade delete
+  - `get_db()` dependency for FastAPI
+- `schemas.py`: Pydantic schemas for request/response validation
+  - Topic schemas: `TopicCreate`, `TopicUpdate`, `TopicResponse`
+  - Recommendation and Notification schemas
+  - Search response schemas
 - `peatix_search.py`: Async scraper function
   - Uses Playwright's async API
   - Launches headless Chromium with custom User-Agent
@@ -53,8 +66,17 @@ python api.py              # Starts on http://localhost:8000
 **API Endpoints**:
 - `GET /` - Root with API info
 - `GET /api/search?keyword={query}` - Search events
+- `GET /api/topics` - List all registered topics
+- `POST /api/topics` - Create a new topic
+- `PUT /api/topics/{id}` - Update a topic
+- `DELETE /api/topics/{id}` - Delete a topic
 - `GET /health` - Health check
 - `GET /docs` - Auto-generated Swagger docs
+
+**Database**:
+- SQLite database stored as `peatix_ai.db` in backend directory
+- Auto-initialized on server startup
+- Tables: `topics`, `recommendations`, `notifications`
 
 ### Frontend (Next.js + Shadcn/ui)
 
