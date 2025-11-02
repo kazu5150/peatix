@@ -2,3 +2,7 @@ playwright==1.48.0
 fastapi==0.115.4
 uvicorn==0.32.0
 pydantic==2.9.2
+sqlalchemy==2.0.35
+python-dotenv==1.0.1
+openai==1.54.4
+apscheduler==3.10.4
