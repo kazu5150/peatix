@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Search, Bookmark } from "lucide-react"
@@ -7,6 +8,11 @@ import { Button } from "@/components/ui/button"
 
 export function Navigation() {
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
@@ -24,7 +30,7 @@ export function Navigation() {
           <div className="flex items-center space-x-2">
             <Link href="/">
               <Button
-                variant={pathname === "/" ? "default" : "ghost"}
+                variant={mounted && pathname === "/" ? "default" : "ghost"}
                 className="flex items-center gap-2"
               >
                 <Search className="h-4 w-4" />
@@ -33,7 +39,7 @@ export function Navigation() {
             </Link>
             <Link href="/topics">
               <Button
-                variant={pathname === "/topics" ? "default" : "ghost"}
+                variant={mounted && pathname === "/topics" ? "default" : "ghost"}
                 className="flex items-center gap-2"
               >
                 <Bookmark className="h-4 w-4" />
